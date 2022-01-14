@@ -10,10 +10,12 @@ class State extends React.Component {
         bad: 0
       };
 
-    goodFeedback = () => {};
-    neutralFeedback = () => {};
-    badfeetback = () => {}
-    
+    onLeaveFeedback = reviewBtn => {
+        this.setState(prevState => ({
+          [reviewBtn]: prevState[reviewBtn] + 1,
+        }));
+      };
+
     countTotalFeedback = () => {
         return Object.values(this.state).reduce((total, value) => total + value, 0);
     };
@@ -26,10 +28,9 @@ class State extends React.Component {
     render() {
         return (
             <div>
-                <FeedbackOptions 
-                    goodFeedback={this.goodFeedback}
-                    neutralFeedback={this.neutralFeedback}
-                    badfeetback={this.badfeetback}
+                <FeedbackOptions
+                    options={Object.keys(this.state)}
+                    onLeaveFeedback={this.onLeaveFeedback}
                 />
 
                 {this.countTotalFeedback() > 0 ? (
