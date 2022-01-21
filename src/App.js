@@ -20,7 +20,8 @@ class App extends React.Component {
   //   return Object.values(this.state).reduce((total, value) => total + value, 0);
   // };
   countTotalFeedback = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   }
   
   countPositiveFeedbackPercentage = () => {
@@ -29,11 +30,11 @@ class App extends React.Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-
+    const namesButtons = Object.keys(this.state);
       return (
           <div>
             <FeedbackOptions
-                options={Object.keys(this.state)}
+                options={ namesButtons }
                 onLeaveFeedback={this.onLeaveFeedback}
               />
                    
